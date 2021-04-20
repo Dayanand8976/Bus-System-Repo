@@ -1,6 +1,8 @@
 package com.lti.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,12 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
 @Entity
 public class Timetable {
 	
@@ -26,15 +22,19 @@ public class Timetable {
 	@Column(name="timetable_id")
 	private int id;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	private LocalDateTime startDateTime;
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+//	@JsonSerialize(using = LocalDateTimeSerializer.class)
+//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	private LocalDate startDate;
+	private LocalTime startTime;
+
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	private LocalDateTime endDateTime;
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+//	@JsonSerialize(using = LocalDateTimeSerializer.class)
+//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	private LocalDate endDate;
+	private LocalTime endTime;
+
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="bus_no")
@@ -46,11 +46,6 @@ public class Timetable {
 	
 	@OneToMany(mappedBy = "timetable")
 	private List<Ticket> tickets;
-	
-	/*
-	 * @OneToMany(mappedBy = "timetable") 
-	 * private List<SeatMapping> seatMappings;
-	 */
 
 	public int getId() {
 		return id;
@@ -60,20 +55,36 @@ public class Timetable {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDateTime() {
-		return endDateTime;
+	public LocalTime getStartTime() {
+		return startTime;
 	}
 
-	public void setEndDateTime(LocalDateTime endDateTime) {
-		this.endDateTime = endDateTime;
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
 	}
 
 	public Bus getBus() {
@@ -99,14 +110,6 @@ public class Timetable {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-
 	
-	
-	/*
-	 * public List<SeatMapping> getSeatMappings() { return seatMappings; }
-	 * 
-	 * public void setSeatMappings(List<SeatMapping> seatMappings) {
-	 * this.seatMappings = seatMappings; }
-	 */
 
 }

@@ -1,6 +1,8 @@
 package com.lti.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,18 +13,19 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class BusStop {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="bus_stop_id")
+	@Column(name = "bus_stop_id")
 	private int id;
-	
+
 	private String name;
 	private String city;
-	private LocalDateTime departureTime;
-	
+	private LocalDate departureDate;
+	private LocalTime departureTime;
+
 	@ManyToOne
-	@JoinColumn(name="route_id")
+	@JoinColumn(name = "route_id")
 	private Route route;
 
 	public int getId() {
@@ -49,11 +52,19 @@ public class BusStop {
 		this.city = city;
 	}
 
-	public LocalDateTime getDepartureTime() {
+	public LocalDate getDepartureDate() {
+		return departureDate;
+	}
+
+	public void setDepartureDate(LocalDate departureDate) {
+		this.departureDate = departureDate;
+	}
+
+	public LocalTime getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(LocalDateTime departureTime) {
+	public void setDepartureTime(LocalTime departureTime) {
 		this.departureTime = departureTime;
 	}
 
@@ -64,6 +75,5 @@ public class BusStop {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
-	
-	
+
 }
