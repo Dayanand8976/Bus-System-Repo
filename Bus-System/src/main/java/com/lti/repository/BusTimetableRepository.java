@@ -1,5 +1,6 @@
 package com.lti.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface BusTimetableRepository {
 	
 	public List<Seat> fetchSeatByBusNo(int busNo);
 	
-	public Timetable fetchTimetableId(String source, String destination, LocalDateTime localDateTime, int busNo);
+	public Timetable fetchTimetableId(String source, String destination, LocalDate startDate, int busNo);
 }

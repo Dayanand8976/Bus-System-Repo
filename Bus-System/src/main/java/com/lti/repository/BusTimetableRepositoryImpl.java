@@ -1,5 +1,6 @@
 package com.lti.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,15 +53,14 @@ public class BusTimetableRepositoryImpl extends GenericRepository implements Bus
 		return list;
 	}
 
-	public Timetable fetchTimetableId(String source, String destination, LocalDateTime localDateTime, int busNo) {
+	public Timetable fetchTimetableId(String source, String destination, LocalDate startDate, int busNo) {
 		String jpql = " select tt from Bus b join b.route r join r.timetable tt where r.source = :sc and "
-				+ "r.destination= :dn and trunc(tt.startDateTime) = trunc(:ldt)"
+				+ "r.destination = :dn and trunc(tt.startDate) = trunc(:ldt)"
 				+ " and b.busNo = :bno";
-		
 		Query q = entityManager.createQuery(jpql);
 		q.setParameter("sc", source);
 		q.setParameter("dn", destination);
-		q.setParameter("ldt", localDateTime);
+		q.setParameter("ldt", startDate);
 		q.setParameter("bno", busNo);
 		
 		Timetable timetable =  (Timetable) q.getSingleResult();

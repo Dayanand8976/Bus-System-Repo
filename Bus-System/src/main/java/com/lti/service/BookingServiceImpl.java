@@ -1,6 +1,6 @@
 package com.lti.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +38,17 @@ public class BookingServiceImpl implements BookingService {
 	private SeatRepository seatRepository;
 
 	public TicketStatusConfirmation bookTicket(TicketStatusConfirmation tsc) {
-		// userId,timetableId,source,destination,startDateTime,busNo,passengerSeat
+		// userId,timetableId,source,destination,startDate,busNo,passengerSeat
 
 		User user = (User) genericRepository.fetch(User.class, tsc.getUserId());
 
 		if (user == null) {
 			throw new RuntimeException("user does not exist");
 		}
-
+		System.out.println(tsc.getStartDate());
+		System.out.println(tsc.getBusNo());
 		Timetable timetable = busTimetableRepository.fetchTimetableId(tsc.getSource(), tsc.getDestination(),
-				tsc.getStartDateTime(), tsc.getBusNo());
+				tsc.getStartDate(), tsc.getBusNo());
 
 		tsc.setTimetableId(timetable.getId());
 
@@ -97,7 +98,7 @@ public class BookingServiceImpl implements BookingService {
 			userTicket.setBusName((String) obj[2]);
 			userTicket.setSource((String) obj[3]);
 			userTicket.setDestination((String) obj[4]);
-			userTicket.setDepartureDateTime((LocalDateTime) obj[5]);
+			userTicket.setDepartureDate((LocalDate) obj[5]);
 			userTicket.setRouteFare((int) obj[6]);
 
 			List<Passenger> passengers = bookingRepository.getPassengersInSingleTicket(userTicket.getTicketId());
@@ -115,6 +116,18 @@ public class BookingServiceImpl implements BookingService {
 			userTickets.add(userTicket);
 		}
 		return userTickets;
+	}
+
+	@Override
+	public Ticket getTicketById(int ticketId) {
+		
+		return genericRepository.fetch(Ticket.class, ticketId);
+	}
+
+	@Override
+	public boolean deleteTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

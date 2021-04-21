@@ -1,6 +1,6 @@
 package com.lti.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class UserTicket {
 
@@ -11,7 +11,7 @@ public class UserTicket {
 	private String busName;
 	private String source;
 	private String destination;
-	private LocalDateTime departureDateTime;
+	private LocalDate departureDate;
 	private int routeFare;
 
 	public int getTicketId() {
@@ -70,12 +70,12 @@ public class UserTicket {
 		this.destination = destination;
 	}
 
-	public LocalDateTime getDepartureDateTime() {
-		return departureDateTime;
+	public LocalDate getDepartureDate() {
+		return departureDate;
 	}
 
-	public void setDepartureDateTime(LocalDateTime departureDateTime) {
-		this.departureDateTime = departureDateTime;
+	public void setDepartureDate(LocalDate departureDate) {
+		this.departureDate = departureDate;
 	}
 
 	public int getRouteFare() {

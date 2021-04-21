@@ -18,9 +18,9 @@ public class TicketStatusConfirmation {
 	private String destination;
 	private int busNo;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime startDateTime;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDate startDate;
 
 	private List<PassengerSeat> passengerSeat;
 
@@ -72,12 +72,12 @@ public class TicketStatusConfirmation {
 		this.busNo = busNo;
 	}
 
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
 	public List<PassengerSeat> getPassengerSeat() {

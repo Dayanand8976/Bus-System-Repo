@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lti.entity.Passenger;
@@ -12,7 +13,10 @@ import com.lti.entity.Timetable;
 
 @Repository
 public class BookingRepositoryImpl extends GenericRepository implements BookingRepository {
-
+	
+	@Autowired
+	GenericRepository genericRepository; 
+	
 	public Object saveTicket(Ticket t) {
 
 		Object obj = entityManager.merge(t);
@@ -39,7 +43,7 @@ public class BookingRepositoryImpl extends GenericRepository implements BookingR
 	@Override
 	public List<Object[]> showAllTicketsOfUser(int userId) {
 
-		String jpql = "Select t.id,u.id,b.name,r.source,r.destination,tt.startDateTime,r.fare"
+		String jpql = "Select t.id,u.id,b.name,r.source,r.destination,tt.startDate,r.fare"
 				+ " FROM Ticket t JOIN t.timetable tt " + " JOIN tt.bus b JOIN b.route r "
 				+ "JOIN t.user u  where u.id=" + userId;
 
