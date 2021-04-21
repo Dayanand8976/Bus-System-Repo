@@ -20,14 +20,37 @@ import com.lti.repository.EnquiryRepository;
 @Transactional
 public class EnquiryServiceImpl implements EnquiryService  {
 	
-	@Autowired
+	@Autowired 
 	private EnquiryRepository enquiryRepository;
 
-	@Override
+	
+
+	@Override 
+	public List<SearchBus> busEnquiry(String source, String destination, LocalDate startDate) {
+		
+		try {
+			return enquiryRepository.busEnquiry(source, destination,startDate );
+			
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			throw new EnquiryServiceException("Sorry! No Bus Available");
+		}
+	}
+
+
+
+	
+	
+	
+	
+	
+	
+	/*@Override
 	public List<Object[]> searchBus(String source, String destination, LocalDate startDateTime) {
 		
 		return enquiryRepository.searchBus(source, destination, startDateTime);
-	}
+	}*/
 
 	/*@Override
 	public List<SearchBus> busEnquiry(String source, String destination, LocalDateTime startDateTime) {
@@ -71,17 +94,5 @@ public class EnquiryServiceImpl implements EnquiryService  {
 	
 	}*/
 
-	/*@Override
-	public List<SearchBus> busEnquiry(String source, String destination, LocalDate startDateTime) {
-		
-		try {
-			return (List<SearchBus>) enquiryRepository.busEnquiry(source, destination,startDateTime );
-			
-		}
-		catch(EmptyResultDataAccessException e)
-		{
-			throw new EnquiryServiceException("Sorry! No Bus Available");
-		}
-	}*/
 
 }

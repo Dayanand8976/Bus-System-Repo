@@ -1,10 +1,12 @@
 package com.lti.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,20 +17,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.SearchBus;
 import com.lti.dto.SearchBusStatus;
+import com.lti.dto.Status;
 import com.lti.entity.Bus;
 import com.lti.entity.Route;
 import com.lti.exception.EnquiryServiceException;
 import com.lti.service.EnquiryService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class EnquiryController {
 	
 	@Autowired
 	private EnquiryService enquiryService;
 	
 	
-	@GetMapping(value = "/searchBus/{source}/{destination}/{date}",produces="application/json")
+	@GetMapping("/searchBus")
+	
+	public List<SearchBus> fetchAllBus(@RequestParam("source")String source,@RequestParam("destination")String destination,
+			@RequestParam("startDate")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate)
+	{
+		try {
+			//Status s =new Status();
+			List<SearchBus> sb= enquiryService.busEnquiry(source, destination, startDate);
+			return sb;
+			
+		}
+		catch(EnquiryServiceException e)
+			{
+				List<SearchBus> sb = null;
+				Status s =new Status();
+				s.setMessage("no bus found");
+				return sb;
+			}
+		}
+		
+	}
+	
+	
+	
+
+//public List<SearchBus> fetchAllBus(@RequestParam("source")String source,@RequestParam("destination")String destination,
+	//	@RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate)
+	/*@GetMapping(value = "/searchBus/{source}/{destination}/{date}",produces="application/json")
 	public List<Object[]> searchBusAvailable(@PathVariable(value = "source") String source,
 			@PathVariable(value = "destination") String destination, @PathVariable(value ="startDateTime") LocalDate startDateTime)
 	{
@@ -43,7 +73,7 @@ public class EnquiryController {
 		}
 		return list;
 		
-	}
+	}*/
 	
 	
 	/*@PostMapping("/search")
@@ -98,22 +128,9 @@ public class EnquiryController {
 
 	
 	
-	/*public List<SearchBusResult> search(@RequestBody SearchBus searchBus)
-	{
-		try {
-			List<SearchBusResult> bus = enquiryService.busEnquiry(searchBus.getSource(), searchBus.getDestination());
-			//List<SearchBusResult> s = (List<SearchBusResult>) new SearchBusResult();
-			Bus b = new Bus();
-			Route r = new Route();
-			s.setBusNo(b.getBusNo());
-			s.setName(b.getName());
-			s.setTotalSeats(b.getTotalSeats());
-			s.setFare(r.getFare());
-			
-			return s;
-		}
+	
 		
 		
-	}*/
+	
 
-}
+
