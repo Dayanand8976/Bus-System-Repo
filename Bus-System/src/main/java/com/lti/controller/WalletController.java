@@ -50,8 +50,25 @@ public class WalletController {
 	
 	@GetMapping("/routeFare")
 	public List<UserPayment> showTotalFare(@RequestParam("id") int userId){
-		 return paymentService.showTotalFare(userId);
+		return paymentService.showTotalFare(userId);
 	}
 	
+	@PostMapping("/addBalance")
+	public BalanceStatus addbalance(@RequestBody BalanceStatus balanceStatus) {
+		try {
+			BalanceStatus wallet = walletService.updatebalance(balanceStatus.getWalletId(), balanceStatus.getBalance());
+			balanceStatus.setStatus(true);
+			balanceStatus.setMessage("Add balance");
+			balanceStatus.setUserId(wallet.getUserId());
+			balanceStatus.setBalance(wallet.getBalance());
+			balanceStatus.setWalletId(wallet.getWalletId());
+			return balanceStatus;
+		}
+		catch(WalletException e){
+			balanceStatus.setStatus(false);
+			balanceStatus.setMessage(e.getMessage());
+			return balanceStatus;
+		}
+	}
 	
 }

@@ -4,6 +4,9 @@ public class BalanceStatus extends Status {
 	
 	private int userId;
 	private int balance;
+	private int walletId;
+	
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -15,6 +18,12 @@ public class BalanceStatus extends Status {
 	}
 	public void setBalance(int balance) {
 		this.balance = balance;
+	}
+	public int getWalletId() {
+		return walletId;
+	}
+	public void setWalletId(int walletId) {
+		this.walletId = walletId;
 	}
 	
 
