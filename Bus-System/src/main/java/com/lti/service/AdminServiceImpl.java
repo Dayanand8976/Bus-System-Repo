@@ -87,6 +87,7 @@ public class AdminServiceImpl implements AdminService{
 //	public Route getRouteById(long rid) throws AdminException {
 //		return adminRepository.getRouteById(rid);
 //	}
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public boolean addRoute(Route route) throws AdminException {
 		return adminRepository.addRoute(route);
@@ -96,9 +97,10 @@ public class AdminServiceImpl implements AdminService{
 //		adminRepository.updateRoutes(route);
 //		
 //	}
-//	@Override
-//	public boolean deleteRoute(Long routeId) throws AdminException {
-//		return adminRepository.deleteRoute(routeId);
-//	}
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Override
+	public boolean deleteRoute(int routeId) throws AdminException {
+		return adminRepository.deleteRoute(routeId);
+	}
 	
 }

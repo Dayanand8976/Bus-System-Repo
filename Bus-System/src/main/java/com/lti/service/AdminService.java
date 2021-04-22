@@ -34,6 +34,6 @@ public interface AdminService {
 //			public abstract Route getRouteById(long rid) throws AdminException;
 			public abstract boolean addRoute(Route route) throws AdminException;
 //			public abstract void updateRoutes(Route route) throws AdminException;
-//			public abstract boolean deleteRoute(Long routeId) throws AdminException;
+			public abstract boolean deleteRoute(int routeId) throws AdminException;
 
 }

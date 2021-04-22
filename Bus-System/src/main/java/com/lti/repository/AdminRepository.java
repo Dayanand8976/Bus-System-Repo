@@ -37,7 +37,7 @@ public interface AdminRepository {
 //		public  Route getRouteById(long rid) throws AdminException;
 		public  boolean addRoute(Route route) throws AdminException;
 //		public  void updateRoutes(Route route) throws AdminException;
-//		public  boolean deleteRoute(Long routeId) throws AdminException;
+		public  boolean deleteRoute(int routeId) throws AdminException;
 		
 }
 

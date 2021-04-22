@@ -29,12 +29,14 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	//----------------------------------user
+	//http://localhost:8777/user
 	@GetMapping("/user")
 	public @ResponseBody List<User> userList() throws AdminException
 	{
 		return adminService.getUserList();
 	}
 	//------------------------------------admin
+	//http://localhost:8777/adminLogin/{email}/{psw}
 	@GetMapping(value = "/adminLogin/{email}/{psw}")
 	public List<Admin> getAdminLoginDetail(@PathVariable(value = "email") String email,@PathVariable(value = "psw") String psw) {
 	List<Admin> admin = null;
@@ -47,6 +49,7 @@ public class AdminController {
 	return admin;
 	}
 	//-----------------------------------bus
+	//http://localhost:8777/busesList
 	@GetMapping(value = "/busesList",produces = "application/json")
 	public List<Bus> getBusList(){
 		List<Bus> busesList=null;
@@ -158,15 +161,14 @@ public class AdminController {
 			// http://localhost:8777/addRoute
 			@PostMapping(value="/addRoute", consumes="application/json")
 			public boolean addRoute(@RequestBody Route route) {	
-			boolean newRecord = false;
-			try {
-				newRecord = adminService.addRoute(route);
-				
-			} catch (AdminException e) {
-				System.out.println("Error occured at adding route Controller");
-				e.printStackTrace();
-			}
-				return newRecord;
+				boolean val = false;
+				try {
+				val = adminService.addRoute(route);
+				} catch (AdminException e) {
+					System.out.println("Error in adding Route");
+					e.printStackTrace();
+				}	
+				return val;
 			}
 //			
 //			//Update route
@@ -184,20 +186,20 @@ public class AdminController {
 //
 //				}
 //			
-//			//Delete Route BY ID
-//			// http://localhost:8777/deleteRoute/{routeId}
-//			@DeleteMapping("/deleteRoute/{routeId}")
-//			public boolean deleteRoutes(@PathVariable Long routeId) {
-//				boolean Record = false;
-//				try {
-//					Record=adminService.deleteRoute(routeId);
-//				} 
-//				catch (AdminException e) {
-//					System.out.println("Error in deleting routes");
-//					e.printStackTrace();
-//				}
-//				return Record;
-//			}
+			//Delete Route BY ID
+			// http://localhost:8777/deleteRoute/{routeId}
+			@DeleteMapping("/deleteRoute/{routeId}")
+			public boolean deleteRoutes(@PathVariable int routeId) {
+				boolean Record = false;
+				try {
+					Record=adminService.deleteRoute(routeId);
+				} 
+				catch (AdminException e) {
+					System.out.println("Error in deleting routes");
+					e.printStackTrace();
+				}
+				return Record;
+			}
 //			
 //			//http://localhost:8777/findRoute/111
 //			@GetMapping(value="/findRoute/{rid}")

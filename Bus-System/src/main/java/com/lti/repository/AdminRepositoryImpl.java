@@ -139,12 +139,12 @@ public class AdminRepositoryImpl implements AdminRepository {
 //		manager.merge(route);
 //		
 //	}
-//	@Override
-//	public boolean deleteRoute(Long routeId) throws AdminException {
-//		Route route = manager.find(Route.class, routeId);
-//		manager.remove(route);
-//		return true;
-//	}
+	@Override
+	public boolean deleteRoute(int routeId) throws AdminException {
+		Route route = manager.find(Route.class, routeId);
+		manager.remove(route);
+		return true;
+	}
 	
 	
 	
