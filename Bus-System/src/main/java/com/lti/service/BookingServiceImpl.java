@@ -42,23 +42,16 @@ public class BookingServiceImpl implements BookingService {
 		// userId,timetableId,source,destination,startDate,busNo,passengerSeat
 
 		User user = (User) genericRepository.fetch(User.class, tsc.getUserId());
-		
 
 		if (user == null) {
 			throw new RuntimeException("user does not exist");
 		}
-				
+
 		Timetable timetable = busTimetableRepository.fetchTimetableId(tsc.getSource(), tsc.getDestination(),
 				tsc.getStartDate(), tsc.getBusNo());
-		
-		int fare = timetable.getRoute().getFare();
-		Wallet wallet = user.getWallet();
-		wallet.setBalance(wallet.getBalance()-fare);
-		user.setWallet(wallet);
 
 		tsc.setTimetableId(timetable.getId());
 
-		
 		Ticket ticket = new Ticket();
 		ticket.setUser(user);
 		ticket.setTimetable(timetable);
@@ -67,7 +60,9 @@ public class BookingServiceImpl implements BookingService {
 		List<Passenger> passengers = new ArrayList<Passenger>();
 
 		// mapping for passenger and seat
+		int passengerCount=0;
 		for (PassengerSeat ps : tsc.getPassengerSeat()) {
+			 passengerCount++;
 			Passenger passenger = new Passenger();
 			passenger.setName(ps.getName());
 			passenger.setTicket(ticket);
@@ -79,6 +74,10 @@ public class BookingServiceImpl implements BookingService {
 			passengers.add(passenger);
 		}
 
+		int fare = timetable.getRoute().getFare();
+		Wallet wallet = user.getWallet();
+		wallet.setBalance(wallet.getBalance() - fare*passengerCount);
+		user.setWallet(wallet);
 		ticket.setPassengers(passengers);
 
 		Ticket t = (Ticket) bookingRepository.saveTicket(ticket);
