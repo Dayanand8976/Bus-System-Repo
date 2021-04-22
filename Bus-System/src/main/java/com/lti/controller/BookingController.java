@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +51,7 @@ public class BookingController {
 		return bookingService.getTicketById(ticketId);
 	}
 
-	
+	@DeleteMapping("/deleteTicket")
 	public boolean deleteTicket(@RequestParam("id") int ticketId) {
 		boolean Record = false;
 

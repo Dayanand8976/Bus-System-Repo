@@ -7,9 +7,9 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.lti.dto.TicketStatusConfirmation;
 import com.lti.entity.Passenger;
 import com.lti.entity.Ticket;
-import com.lti.entity.Timetable;
 
 @Repository
 public class BookingRepositoryImpl extends GenericRepository implements BookingRepository {
@@ -51,6 +51,8 @@ public class BookingRepositoryImpl extends GenericRepository implements BookingR
 
 		return q.getResultList();
 	}
+	
+	
 
 	@Override
 	public List<Passenger> getPassengersInSingleTicket(int ticketId) {
@@ -58,5 +60,11 @@ public class BookingRepositoryImpl extends GenericRepository implements BookingR
 		String jpql = "Select p from Passenger p join p.ticket t where t.id = "+ticketId;
 		Query q = entityManager.createQuery(jpql);
 		return q.getResultList();
+	}
+
+	@Override
+	public boolean deleteTicket(Ticket ticket) {
+		entityManager.remove(ticket);
+		return true;
 	}
 }

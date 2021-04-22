@@ -12,4 +12,6 @@ public interface BookingRepository {
 	public List<Object[]> showAllTicketsOfUser(int userId);
 
 	public List<Passenger> getPassengersInSingleTicket(int ticketId);
+
+	public boolean deleteTicket(Ticket ticket);
 }
