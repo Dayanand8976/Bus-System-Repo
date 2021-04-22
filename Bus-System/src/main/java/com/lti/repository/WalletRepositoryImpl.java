@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lti.entity.Passenger;
@@ -33,8 +32,8 @@ public class WalletRepositoryImpl extends GenericRepository implements WalletRep
 		Query q =entityManager.createQuery(jpql);
 		q.setParameter("id",UserId);
 		return q.getResultList();
-		
 	}
+	
 	
    public List<Passenger> getPassengersInSingleTicket(int ticketId) {
 		String jpql = "Select p from Passenger p join p.ticket t where t.id=:ticketId";
@@ -44,9 +43,19 @@ public class WalletRepositoryImpl extends GenericRepository implements WalletRep
 		return list;
 	}
 
-   public Wallet viewWallet(int id) {
-	  // Wallet wallet = repo.fetch(Wallet.class, id);
-	   return null;
+   public void viewWallet(int wid,int bal) {
+	    String jpql="update Wallet w set w.balance=w.balance+:bal where w.id=:wid";
+	    Query q = entityManager.createQuery(jpql);
+		q.setParameter("bal", bal);
+		q.setParameter("wid", wid);
+	    q.executeUpdate();
+	}
+   
+   public void deleteWallet(int wid) {
+	    String jpql="delete Wallet w where w.id=:wid";
+	    Query q = entityManager.createQuery(jpql);
+		q.setParameter("wid", wid);
+	    q.executeUpdate();
 	}
    
 }

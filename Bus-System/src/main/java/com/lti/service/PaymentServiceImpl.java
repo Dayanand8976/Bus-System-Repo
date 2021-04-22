@@ -8,8 +8,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.dto.BalanceStatus;
 import com.lti.dto.UserPayment;
 import com.lti.entity.Passenger;
+import com.lti.entity.Wallet;
 import com.lti.exception.WalletException;
 import com.lti.repository.WalletRepository;
 
@@ -26,6 +28,8 @@ public class PaymentServiceImpl implements PaymentService{
 		List<Object[]> list =walletRepo.TotalFare(userId);
 		for(Object[] obj:list) {
 			UserPayment userPayment= new UserPayment();
+			BalanceStatus bs = new BalanceStatus();
+			Wallet wallet= new Wallet();
 			userPayment.setTicketId((int)obj[0]);
 			userPayment.setUserId((int)obj[1]);
 			userPayment.setRouteFare((int)obj[2]);
@@ -44,7 +48,6 @@ public class PaymentServiceImpl implements PaymentService{
 			userPayment.setTotalFare(totalFare);
 			userPayment.setMessage("booked");
 			userPayment.setStatus(true);
-			
 			userPay.add(userPayment);
 		 }
 		return userPay;

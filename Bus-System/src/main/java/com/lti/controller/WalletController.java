@@ -32,13 +32,14 @@ public class WalletController {
 	@PostMapping("/checkbalance")
 	public BalanceStatus balance(@RequestBody Balance balance) {
 		try {
-			Wallet wallet = walletService.checkbalance(balance.getEmail());
+			Wallet wallet = walletService.checkBalance(balance.getEmail());
 			BalanceStatus balanceStatus = new BalanceStatus();
 			balanceStatus.setStatus(true);
 			balanceStatus.setMessage("Check your balance");
 			balanceStatus.setUserId(wallet.getUser().getId());
 			balanceStatus.setBalance(wallet.getBalance());
 			return balanceStatus;
+			
 		}
 		catch(WalletException e){
 			BalanceStatus balanceStatus = new BalanceStatus();
@@ -54,21 +55,27 @@ public class WalletController {
 	}
 	
 	@PostMapping("/addBalance")
-	public BalanceStatus addbalance(@RequestBody BalanceStatus balanceStatus) {
+	public BalanceStatus updateBalance(@RequestBody Wallet wallet){
 		try {
-			BalanceStatus wallet = walletService.updatebalance(balanceStatus.getWalletId(), balanceStatus.getBalance());
-			balanceStatus.setStatus(true);
-			balanceStatus.setMessage("Add balance");
-			balanceStatus.setUserId(wallet.getUserId());
-			balanceStatus.setBalance(wallet.getBalance());
-			balanceStatus.setWalletId(wallet.getWalletId());
+			Wallet w =walletService.updateBalance(wallet.getId(),wallet.getBalance());
+			BalanceStatus balanceStatus = new BalanceStatus();
+			balanceStatus.setWalletId(w.getId());
+			balanceStatus.setBalance(w.getBalance());
 			return balanceStatus;
 		}
-		catch(WalletException e){
-			balanceStatus.setStatus(false);
+		catch(WalletException e) {
+			BalanceStatus balanceStatus = new BalanceStatus();
 			balanceStatus.setMessage(e.getMessage());
 			return balanceStatus;
 		}
 	}
+	
+	@GetMapping("/deleteWallet")
+	public String deleteWallet(@RequestParam("id") int id) {
+		return walletService.deleteWallet(id);
+	}
+	
+	
+	
 	
 }

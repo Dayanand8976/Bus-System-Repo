@@ -7,7 +7,8 @@ import com.lti.entity.Wallet;
 
 public interface WalletService {
 
-	public Wallet checkbalance(String email);
-	public BalanceStatus updatebalance(int id,int bal);
+	public Wallet checkBalance(String email);
+	public Wallet updateBalance(int id,int bal);
+	public String deleteWallet(int id);
 	
 }

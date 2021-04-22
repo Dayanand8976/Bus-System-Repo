@@ -18,34 +18,31 @@ public class WalletServiceImp implements WalletService{
 	
 	@Autowired
 	private WalletRepositoryImpl walletRepo;
+	
+    @Override
+	public Wallet checkBalance(String email) {
+    	int id= walletRepo.fetchIdByEmail(email);
+		Wallet wallet = walletRepo.fetch(Wallet.class,id);
+		return wallet;
+		}
 
 
-	public Wallet checkbalance(String email) {
-		try {
-			int id= walletRepo.fetchIdByEmail(email);
-			Wallet wallet = walletRepo.fetch(Wallet.class,id);
-			return wallet;
-		}
-		catch(EmptyResultDataAccessException e) {
-			throw new WalletException("No wallet for this email");
-		}
+	@Override
+	public Wallet updateBalance(int id,int bal) {
+		Wallet wallet = walletRepo.fetch(Wallet.class, id);
+		//walletRepo.viewWallet(id, bal);
+		wallet.setBalance(wallet.getBalance()+bal);
+		walletRepo.save(wallet);
+		return wallet;
+		
 	}
 
-	public BalanceStatus updatebalance(int id,int bal) {
-		BalanceStatus bs = new BalanceStatus();
-		Wallet wallet= walletRepo.viewWallet(id);
-		if(wallet.getBalance()<1) {
-			throw new WalletException("Balance is empty");
-		}
-		int existBalance=wallet.getBalance();
-		bs.setBalance(existBalance+bal);
-		bs.setWalletId(id);
-		return bs;
+
+	@Override
+	public String deleteWallet(int id) {
+		walletRepo.fetch(Wallet.class, id);
+        walletRepo.deleteWallet(id);
+		return "Deleted" ;
 	}
 
-	
-	
-	
-	
-	
 }
