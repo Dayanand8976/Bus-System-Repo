@@ -69,15 +69,7 @@ public class AdminServiceImpl implements AdminService{
 //	public boolean addTimetable(String timetableId, String dateTime, Bus bus, Route route) throws AdminException {
 //		return adminRepository.addTimetable(timetableId, dateTime, bus, route);
 //	}
-//	@Override
-//	public boolean updateTimetable(String timetableId, String dateTime, Bus bus, Route route) throws AdminException {
-//		return adminRepository.updateTimetable(timetableId, dateTime, bus, route);
-//	}
-//	@Override
-//	public Timetable findTimeTable(String id) throws AdminException {
-//		return adminRepository.findTimeTable(id);
-//	}
-//	
+	
 //	//-------------------------------------route
 	@Override
 	public List<Route> getRouteList() throws AdminException {
@@ -92,11 +84,7 @@ public class AdminServiceImpl implements AdminService{
 	public boolean addRoute(Route route) throws AdminException {
 		return adminRepository.addRoute(route);
 	}
-//	@Override
-//	public void updateRoutes(Route route) throws AdminException {
-//		adminRepository.updateRoutes(route);
-//		
-//	}
+
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public boolean deleteRoute(int routeId) throws AdminException {

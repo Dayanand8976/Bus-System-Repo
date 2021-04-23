@@ -96,27 +96,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 //		manager.persist(t);
 //		return true;
 //	}
-//	@Override
-//	public boolean updateTimetable(int timetableId, String dateTime, Bus bus, Route route) throws AdminException {
-//		Timetable t= new Timetable();
-//		t.setId(timetableId);
-//		try {
-//			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime);
-//			t.setDepartureDateTime(date);
-//		} catch (ParseException e) {
-//			System.out.println("Error in date");
-//			e.printStackTrace();
-//		}
-//		t.setBus(bus);
-//		t.setRoute(route);
-//		manager.merge(t);
-//		return true;
-//	}
-//	@Override
-//	public Timetable findTimeTable(String id) throws AdminException {
-//		Timetable timeTable=manager.find(Timetable.class, id);
-//		return timeTable ;
-//	}
+
 //	//------------------------------------------route
 	@Override
 	public List<Route> getRouteList() throws AdminException {
@@ -134,11 +114,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 		manager.persist(route);
 		return true;
 	}
-//	@Override
-//	public void updateRoutes(Route route) throws AdminException {
-//		manager.merge(route);
-//		
-//	}
+
 	@Override
 	public boolean deleteRoute(int routeId) throws AdminException {
 		Route route = manager.find(Route.class, routeId);

@@ -29,14 +29,12 @@ public interface AdminRepository {
 		//TimeTable
 		public  List<Timetable> getTimetable() throws AdminException;
 //		public  boolean addTimetable(int timetableId,String dateTime,Bus bus,Route route) throws AdminException;
-//		public  boolean updateTimetable(int timetableId,String dateTime,Bus bus,Route route) throws AdminException;
-//		public Timetable findTimeTable(String id) throws AdminException;
+
 //		
 //		//Routes
 		public  List<Route> getRouteList() throws AdminException;
 //		public  Route getRouteById(long rid) throws AdminException;
 		public  boolean addRoute(Route route) throws AdminException;
-//		public  void updateRoutes(Route route) throws AdminException;
 		public  boolean deleteRoute(int routeId) throws AdminException;
 		
 }

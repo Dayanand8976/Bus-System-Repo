@@ -26,14 +26,11 @@ public interface AdminService {
 //			//TimeTable
 			public  List<Timetable> getTimetable() throws AdminException;
 //			public  boolean addTimetable(String timetableId,String dateTime,Bus bus,Route route) throws AdminException;
-//			public  boolean updateTimetable(String timetableId,String dateTime,Bus bus,Route route) throws AdminException;
-//			public Timetable findTimeTable(String id) throws AdminException;
+
 //			
 //			//Routes
 			public abstract List<Route> getRouteList() throws AdminException;
-//			public abstract Route getRouteById(long rid) throws AdminException;
 			public abstract boolean addRoute(Route route) throws AdminException;
-//			public abstract void updateRoutes(Route route) throws AdminException;
 			public abstract boolean deleteRoute(int routeId) throws AdminException;
 
 }

@@ -110,26 +110,8 @@ public class AdminController {
 //			
 //			return record;
 //	}
-//	
-//	@GetMapping(value = "/updateTimetable/{tid}/{dateTime}/{busid}/{routeid}")
-//	public boolean updateTimetable(@PathVariable(value = "tid") String tid,
-//			@PathVariable(value = "dateTime") String dateTime,
-//			@PathVariable(value = "busid") String busid,
-//			@PathVariable(value = "routeid") long routeid ) {
-//			boolean record=false;
-//			try {
-//				Bus bus=adminService.getBusById(busid);
-//				Route route=adminService.getRouteById(routeid);
-//				record=adminService.updateTimetable(tid, dateTime, bus, route);
-//			} catch (AdminException e) {
-//				System.out.println("Error at controller");
-//				e.printStackTrace();
-//			}
-//			
-//			return record;
-//	}
-//	
-	//http://localhost:8777/findTimeTable/1
+
+	//http://localhost:8777/timetable
 	@GetMapping(value = "/timetable",produces = "application/json")
 	public List<Timetable> getTimetable(){
 		List<Timetable> Timetable=null;
@@ -143,7 +125,7 @@ public class AdminController {
 	}
 
 //	//----------------------------------route
-//	//Get Routes List
+
 //	// http://localhost:8777/routesList
 	@GetMapping(value = "/routesList",produces = "application/json")
 	public List<Route> getRouteList(){
@@ -156,8 +138,7 @@ public class AdminController {
 				}
 				return routeList;
 			}
-//			
-			//Add Route
+			
 			// http://localhost:8777/addRoute
 			@PostMapping(value="/addRoute", consumes="application/json")
 			public boolean addRoute(@RequestBody Route route) {	
@@ -170,22 +151,7 @@ public class AdminController {
 				}	
 				return val;
 			}
-//			
-//			//Update route
-//			//http://localhost:8777/updateRoute/227
-//			@PutMapping(value="/updateRoute/{id}",consumes="application/json")
-//				public void updateRoute(@PathVariable long id, @RequestBody Route route)
-//				{
-//					route.setRouteId(id);
-//					try {
-//						adminService.updateRoutes(route);
-//					} catch (AdminException e) {
-//						System.out.println("error while updating");
-//						e.printStackTrace();
-//					}
-//
-//				}
-//			
+		
 			//Delete Route BY ID
 			// http://localhost:8777/deleteRoute/{routeId}
 			@DeleteMapping("/deleteRoute/{routeId}")
@@ -200,18 +166,5 @@ public class AdminController {
 				}
 				return Record;
 			}
-//			
-//			//http://localhost:8777/findRoute/111
-//			@GetMapping(value="/findRoute/{rid}")
-//			public Route findRouteById(@PathVariable long rid)
-//				{
-//					Route route = null;
-//					try {
-//						route = adminService.getRouteById(rid);
-//					} catch (AdminException e) {
-//						System.out.println("error while finding route id");
-//						e.printStackTrace();
-//					}
-//					return route;
-//				}
+
 }
