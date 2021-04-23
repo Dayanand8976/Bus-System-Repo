@@ -1,7 +1,6 @@
 package com.lti.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.dto.SearchBus;
 import com.lti.dto.SearchBusStatus;
-import com.lti.entity.Bus;
+import com.lti.entity.Seat;
 import com.lti.exception.EnquiryServiceException;
 import com.lti.repository.EnquiryRepository;
 
@@ -26,7 +24,7 @@ public class EnquiryServiceImpl implements EnquiryService  {
 	
 
 	@Override 
-	public List<SearchBus> busEnquiry(String source, String destination, LocalDate startDate) {
+	public List<SearchBusStatus> busEnquiry(String source, String destination, LocalDate startDate) {
 		
 		try {
 			return enquiryRepository.busEnquiry(source, destination,startDate );
@@ -36,6 +34,14 @@ public class EnquiryServiceImpl implements EnquiryService  {
 		{
 			throw new EnquiryServiceException("Sorry! No Bus Available");
 		}
+	}
+
+
+
+	@Override
+	public List<Seat> getSeatNumberList(int ttid) {
+		
+		return enquiryRepository.getSeatNumberList(ttid);
 	}
 
 
