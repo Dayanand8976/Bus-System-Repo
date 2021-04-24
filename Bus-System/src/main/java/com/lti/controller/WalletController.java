@@ -38,6 +38,7 @@ public class WalletController {
 			balanceStatus.setMessage("Check your balance");
 			balanceStatus.setUserId(wallet.getUser().getId());
 			balanceStatus.setBalance(wallet.getBalance());
+			balanceStatus.setWalletId(wallet.getId());
 			return balanceStatus;
 			
 		}
@@ -49,15 +50,25 @@ public class WalletController {
 		}
 	}
 	
-	@GetMapping("/routeFare")
-	public List<UserPayment> showTotalFare(@RequestParam("id") int userId){
-		return paymentService.showTotalFare(userId);
+	@GetMapping("/details")
+	public List<UserPayment> showDetails(@RequestParam("id") int userId){
+		return paymentService.showDetails(userId);
+	}
+	
+	@GetMapping("/pay")
+	public int subBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
+		return walletService.subBalance(userId, wId);
+	}
+	
+	@GetMapping("/refund")
+	public int refundBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
+		return walletService.refundBalance(userId, wId);
 	}
 	
 	@PostMapping("/addBalance")
 	public BalanceStatus updateBalance(@RequestBody Wallet wallet){
 		try {
-			Wallet w =walletService.updateBalance(wallet.getId(),wallet.getBalance());
+			Wallet w =walletService.addBalance(wallet.getId(),wallet.getBalance());
 			BalanceStatus balanceStatus = new BalanceStatus();
 			balanceStatus.setWalletId(w.getId());
 			balanceStatus.setBalance(w.getBalance());
@@ -70,10 +81,10 @@ public class WalletController {
 		}
 	}
 	
-	@GetMapping("/deleteWallet")
+	/*@GetMapping("/deleteWallet")
 	public String deleteWallet(@RequestParam("id") int id) {
 		return walletService.deleteWallet(id);
-	}
+	}*/
 	
 	
 	

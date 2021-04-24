@@ -11,7 +11,7 @@ public interface WalletRepository {
 
 	public int fetchIdByEmail(String email);
 	public List<Object[]> TotalFare (int UserId);
-	public List<Passenger> getPassengersInSingleTicket(int ticketId);
-	public void viewWallet(int wid,int bal);
-	public void deleteWallet(int wid);
+	//public void deleteWallet(int wid);
+	public int fetchById(int uid);
+	//public int addBalance(int wid);
 }

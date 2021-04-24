@@ -1,5 +1,6 @@
 package com.lti.service;
 
+import java.time.LocalDate;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class UserServiceImpl implements UserService {
 			throw new UserServiceException("User already registered!");
 		else {
 			user.setPassword(Base64.getEncoder().encodeToString(user.getPassword().getBytes()));
+			user.setRegistrationDate(LocalDate.now());
+			user.setRegisteredUser("yes");
 			User userUpdate = (User) userRepo.save(user);
 			return userUpdate.getId();
 		}

@@ -8,7 +8,11 @@ import com.lti.entity.Wallet;
 public interface WalletService {
 
 	public Wallet checkBalance(String email);
-	public Wallet updateBalance(int id,int bal);
-	public String deleteWallet(int id);
+	public Wallet addBalance(int wid,int bal);
+	public int refundBalance(int id,int wid);
+	/*public String deleteWallet(int id);*/
+	public int subBalance(int uid,int wid);
+	
+	
 	
 }

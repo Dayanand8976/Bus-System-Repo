@@ -6,5 +6,5 @@ import com.lti.dto.UserPayment;
 
 public interface PaymentService {
 
-	public List<UserPayment> showTotalFare(int userId);
+	public List<UserPayment> showDetails(int userId);
 }
