@@ -56,13 +56,25 @@ public class WalletController {
 	}
 	
 	@GetMapping("/pay")
-	public int subBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
-		return walletService.subBalance(userId, wId);
+	public BalanceStatus subBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
+		    int bal = walletService.subBalance(userId, wId);
+			BalanceStatus balanceStatus = new BalanceStatus();
+			balanceStatus.setStatus(true);
+			balanceStatus.setUserId(userId);
+			balanceStatus.setBalance(bal);
+			balanceStatus.setWalletId(wId);
+			return balanceStatus;
 	}
 	
 	@GetMapping("/refund")
-	public int refundBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
-		return walletService.refundBalance(userId, wId);
+	public BalanceStatus refundBalance(@RequestParam("id") int userId,@RequestParam("wid") int wId){
+			int bal = walletService.refundBalance(userId, wId);
+			BalanceStatus balanceStatus = new BalanceStatus();
+			balanceStatus.setStatus(true);
+			balanceStatus.setUserId(userId);
+			balanceStatus.setBalance(bal);
+			balanceStatus.setWalletId(wId);
+			return balanceStatus;
 	}
 	
 	@PostMapping("/addBalance")
