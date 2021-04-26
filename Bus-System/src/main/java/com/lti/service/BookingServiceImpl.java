@@ -43,9 +43,9 @@ public class BookingServiceImpl implements BookingService {
 
 		User user = (User) genericRepository.fetch(User.class, tsc.getUserId());
 
-		Timetable timetable = busTimetableRepository.fetchTimetableId(tsc.getSource(), tsc.getDestination(),
-				tsc.getStartDate(), tsc.getBusNo());
-
+//		Timetable timetable = busTimetableRepository.fetchTimetableId(tsc.getSource(), tsc.getDestination(),
+//				tsc.getStartDate(), tsc.getBusNo());
+		Timetable timetable = (Timetable)genericRepository.fetch(Timetable.class,tsc.getTicketId());
 		tsc.setTimetableId(timetable.getId());
 
 		Ticket ticket = new Ticket();
