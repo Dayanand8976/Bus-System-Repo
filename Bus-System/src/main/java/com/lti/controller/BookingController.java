@@ -31,9 +31,9 @@ public class BookingController {
 	 * status ; }
 	 */
 
-	@PostMapping(path = "/bookTicket")
+	@PostMapping(path = "/bookTicket" , consumes = "application/json")
 	public TicketStatusConfirmation reserveSeat(@RequestBody TicketStatusConfirmation tsc) {
-
+		System.out.println(tsc);
 		return bookingService.bookTicket(tsc);
 
 	}

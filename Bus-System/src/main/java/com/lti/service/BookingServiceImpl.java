@@ -43,10 +43,6 @@ public class BookingServiceImpl implements BookingService {
 
 		User user = (User) genericRepository.fetch(User.class, tsc.getUserId());
 
-		if (user == null) {
-			throw new RuntimeException("user does not exist");
-		}
-
 		Timetable timetable = busTimetableRepository.fetchTimetableId(tsc.getSource(), tsc.getDestination(),
 				tsc.getStartDate(), tsc.getBusNo());
 

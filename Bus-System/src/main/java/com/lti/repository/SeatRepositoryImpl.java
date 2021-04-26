@@ -9,12 +9,12 @@ import com.lti.entity.Seat;
 @Repository
 public class SeatRepositoryImpl extends GenericRepository implements SeatRepository {
 
-	public Seat fetchSeat(int seatNo, int bNo) {
+	public Seat fetchSeat(String seatNo, int bNo) {
 
 		String jpql = " select s from Seat s  where s.seatNo = :sn and s.bus.busNo = :bn";
 
 		Query q = entityManager.createQuery(jpql);
-		q.setParameter("sn", seatNo);
+		q.setParameter("sn", Integer.parseInt(seatNo));
 		q.setParameter("bn", bNo);
 
 		Seat seat = (Seat) q.getSingleResult();

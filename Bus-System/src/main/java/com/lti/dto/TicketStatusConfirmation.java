@@ -17,7 +17,7 @@ public class TicketStatusConfirmation {
 	private String source;
 	private String destination;
 	private int busNo;
-
+	
 	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDate startDate;
